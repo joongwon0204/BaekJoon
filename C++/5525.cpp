@@ -1,3 +1,4 @@
+// https://www.acmicpc.net/problem/5525
 #include <iostream>
 #include <string>
 #include <vector>
@@ -18,7 +19,7 @@ int main() {
     char s[m+1];
     cin >> s;
 
-    char currChar, prevChar;
+    char currChar, prevChar = s[0];
     for (i=1; i<m; i++) {
         currChar = s[i];
         if (canCountWith(prevChar,currChar,counter)) {
