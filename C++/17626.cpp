@@ -13,7 +13,7 @@ int main() {
         num[i] = 1;
     }
 
-    for (i = 1; i < 50000; i++) {
+    for (i = 1; i < 50001; i++) {
         minCount = 10;
         for (j = 1; j*j <= i; j++) {
             minCount = min(minCount, num[i-j*j]);
