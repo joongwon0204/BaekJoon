@@ -20,7 +20,7 @@ int L(int n) {
 }
 
 int R(int n) {
-    return (n / 1000) + ((n % 1) * 1000);
+    return (n / 10) + ((n % 10) * 1000);
 }
 
 string bfs(int a, int b) {
@@ -72,5 +72,3 @@ int main() {
         cout << bfs(a, b) << '\n';
     }
 }
-
-
