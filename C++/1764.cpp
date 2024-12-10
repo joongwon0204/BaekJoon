@@ -35,7 +35,7 @@ int main() {
     }
 
     sort(dbs.begin(), dbs.end());
-    cout << temp.size() << '\n';
+    cout << dbs.size() << '\n';
     for (auto& db: dbs) {
         cout << db << '\n';
     }
