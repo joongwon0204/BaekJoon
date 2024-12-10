@@ -34,14 +34,6 @@ int bfs(int n, const int k, int* visited) {
     if(push_n_x_2power(n * 2, k, max_n, q, visited)) { return 0; }
 
     while (!q.empty()) {
-        queue<int> temp;
-        while (!q.empty()) {
-            cout << q.front() << " ";
-            temp.push(q.front());
-            q.pop();
-        }
-        cout << "ㅁㄴㅇㄹㅁㄴㅇㄹ" << endl;
-        q = temp;
 
         int size = q.size();
         while (size--) {
