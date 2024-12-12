@@ -27,6 +27,7 @@ int main() {
     for (int ti = 0; ti < t; ti++) {
         cin >> n >> m >> w;
 
+        edges.clear();
         min_times.assign(n, 100000000);
         min_times[0] = 0;
 
@@ -47,7 +48,7 @@ int main() {
                 v = edge[1];
                 time = edge[2];
 
-                if (min_times[u] != 100000000 && min_times[v] > min_times[u] + time) {
+                if (min_times[v] > min_times[u] + time) {
                     min_times[v] = min_times[u] + time;
                 }
             }
@@ -59,7 +60,7 @@ int main() {
             v = edge[1];
             time = edge[2];
 
-            if (min_times[u] != 100000000 && min_times[v] > min_times[u] + time) {
+            if (min_times[v] > min_times[u] + time) {
                 ans = "YES";
                 break;
             }
