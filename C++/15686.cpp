@@ -13,13 +13,13 @@ void init() {
 
 int min_d = 1234567;
 
-void solve(int prev_c, int left, vector<bool>& sellected, const int& c, const int& h, const vector<vector<int>>& ds) {
+void solve(int prev_c, int left, vector<bool>& selected, const int& c, const int& h, const vector<vector<int>>& ds) {
     if (left == 0) {
         int temp, cur_d = 0;
         for (int i = 0; i < h; i++) {
             temp = 1234567;
             for (int j = 0; j < c; j++) {
-                if (!sellected[j]) { continue; }
+                if (!selected[j]) { continue; }
                 temp = min(temp, ds[j][i]);
             }
             cur_d += temp;
@@ -29,9 +29,9 @@ void solve(int prev_c, int left, vector<bool>& sellected, const int& c, const in
     }
 
     for (int i = prev_c + 1; i < c - left + 1; i++) {
-        sellected[i] = true;
-        solve(i, left - 1, sellected, c, h, ds);
-        sellected[i] = false;
+        selected[i] = true;
+        solve(i, left - 1, selected, c, h, ds);
+        selected[i] = false;
     }
 }
 
@@ -66,14 +66,8 @@ int main() {
         }
     }
 
-    for (int i = 0; i < c; i++) {
-        cout << '\n';
-        for (int j = 0; j < h; j++) {
-            cout << ds[i][j] << ' ';
-        }
-    }
-    vector<bool> sellected(c, false);
-    solve(-1, m, sellected, c, h, ds);
+    vector<bool> selected(c, false);
+    solve(-1, m, selected, c, h, ds);
 
     cout << min_d;
 
