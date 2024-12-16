@@ -17,7 +17,7 @@ int main() {
     cin >> a >> b;
 
     int la = a.size(), lb = b.size();
-    vector<vector<int>> cache(la + 1, vector<int>(lb + 1, -1));
+    vector<vector<int>> cache(la + 1, vector<int>(lb + 1, 0));
 
     for (int i = 1; i <= la; i++) {
         for (int j = 1; j <= lb; j++) {
