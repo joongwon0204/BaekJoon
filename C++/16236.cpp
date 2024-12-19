@@ -58,7 +58,6 @@ int bfs(int n, vector<int>& shark, vector<vector<int>>& water) {
             vector<int> fish_eaten = fishes[0];
             shark = {fish_eaten[0], fish_eaten[1], (size == fish_eaten[3] ? size + 1 : size), (size == fish_eaten[3] ? 0 : fish_eaten[3])};
             water[fish_eaten[0]][fish_eaten[1]] = 0;
-            cout << ret << '\n';
             return ret;
         }
 
