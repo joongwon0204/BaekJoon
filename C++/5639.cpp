@@ -1,80 +1,72 @@
-// https://www.acmicpc.net/problem/7453
+// https://www.acmicpc.net/problem/5639
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
-void init() {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-}
+class Node {
+public:
+    int value;
+    Node* left;
+    Node* right;
 
-// 범위가 [s, e)에서 탐색, s로 초기화, lower는 목표값중 가장 작은 i, upper는 목표값중 가장 큰 i + 1
-int binary_s(long long x, vector<long long>& cd) {
-    int l, h, m, s = 0, e = cd.size();
-    long long cur;
+    Node(int val) : value(val), left(nullptr), right(nullptr) {}
 
-    while (s < e) {
-        m = (s + e) / 2;
-        cur = cd[m];
+    void setLeft(Node* node) {
+        left = node;
+    }
 
-        if (cur >= x) {
-            e = m;
+    void setRight(Node* node) {
+        right = node;
+    }
+};
+
+class BST {
+public:
+    Node* root;
+
+    BST() : root(NULL) {}
+
+    void insert(int key) {
+        Node* x = root;
+        Node* y = NULL;
+
+        while (x != NULL) {
+            y = x;
+            if (key < x->value) {
+                x = x->left;
+            } else {
+                x = x->right;
+            }
+        }
+
+        if (y == NULL) root = new Node(key);
+        else if (key < y->value) {
+            y->setLeft(new Node(key));
         } else {
-            s = m + 1;
+            y->setRight(new Node(key));
         }
     }
-    l = s;
 
-    s = 0, e = cd.size();
-    while (s < e) {
-        m = (s + e) / 2;
-        cur = cd[m];
-
-        if (cur > x) {
-            e = m;
-        } else {
-            s = m + 1;
-        }
+    void doPostWalk() {
+        postWalk(root);
     }
-    h = s;
 
-    return max(0, h - l);
-}
+    void postWalk(Node* root) {
+        if (root == NULL) return;
+        postWalk(root->left);
+        postWalk(root->right);
+        cout << root->value << "\n";
+    }
+};
 
 int main() {
-    init();
-
-    int n;
-    long long ta, tb, tc, td;
-
-    cin >> n;
-
-    vector<long long> a, b, c, d, ab, cd;
-    for (int i = 0; i < n; i++) {
-        cin >> ta >> tb >> tc >> td;
-        a.push_back(ta);
-        b.push_back(tb);
-        c.push_back(tc);
-        d.push_back(td);
+    BST tree;
+    int tmp;
+    while (cin >> tmp) {
+        tree.insert(tmp);
     }
-    
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            ab.push_back(a[i] + b[j]);
-            cd.push_back(c[i] + d[j]);
-        }
-    }
-
-    sort(ab.begin(), ab.end());
-    sort(cd.begin(), cd.end());
-
-    long long ans = 0;
-    for (auto& x: ab) {
-        ans += binary_s(-x, cd);
-    }
-
-    cout << ans;
+    tree.doPostWalk();
+    return 0;
 }
